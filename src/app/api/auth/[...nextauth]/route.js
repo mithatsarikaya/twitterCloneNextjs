@@ -15,7 +15,7 @@ const handler = NextAuth({
 
         try {
           const user = await User.findOne({
-            email: credentials.email,
+            username: credentials.username,
           });
 
           if (user) {
@@ -25,7 +25,21 @@ const handler = NextAuth({
             );
 
             if (isPasswordCorrect) {
-              return user;
+              console.log("user: ", typeof user);
+
+              // let newUser = {
+              //   username: user.username,
+              //   id: user._id.toString(),
+              // };
+
+              // console.log(newUser);
+
+              let data = {
+                userId: user._id.toString(),
+                name: user.username,
+                email: `${user._id.toString()}`,
+              };
+              return data;
             } else {
               throw new Error("Wrong Credentials!");
             }
@@ -39,7 +53,7 @@ const handler = NextAuth({
     }),
   ],
   pages: {
-    error: "/dashboard/login",
+    error: "/login",
   },
 });
 

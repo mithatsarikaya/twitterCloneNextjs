@@ -1,8 +1,12 @@
+"use client";
 import Tweet from "./components/Tweet";
 import Sidebar from "./components/Sidebar";
 import Link from "next/link";
-
+import { signOut, useSession } from "next-auth/react";
 export default function Home() {
+  const session = useSession();
+  console.log(session);
+
   return (
     <div className="flex bg-white mx-20 w-100 h-screen">
       {/* sidebar */}
@@ -10,6 +14,9 @@ export default function Home() {
       <Sidebar />
       {/* sidebar */}
 
+      {session.status === "authenticated" && (
+        <button onClick={signOut}>Logout</button>
+      )}
       {/* MAIN */}
       <div className="bg-white w-5/12 border-x-2 pt-3">
         <div className="pl-4">
@@ -35,7 +42,7 @@ export default function Home() {
             />
             <div className="float-right">
               <span className="mr-5 pr-5 border-r-2">140</span>
-              <button className="border-2 px-2 my-2 fw-bold py-1 bg-cyan-500 ml-auto text-white  rounded-full font-medium ">
+              <button className="border-2 px-2 my-2 fw-bold py-1 bg-cyan-500 ml-auto text-white  rounded-full font-medium hover:bg-cyan-400">
                 Tweetle
               </button>
             </div>
@@ -66,9 +73,11 @@ export default function Home() {
                 Log in{" "}
               </button>
             </Link>
-            <button className=" bg-white border-slate-200 text-black border-2 rounded-full px-2 py-1 mr-1 hover:bg-slate-300">
-              Sign up
-            </button>
+            <Link href="/register">
+              <button className=" bg-white border-slate-200 text-black border-2 rounded-full px-2 py-1 mr-1 hover:bg-slate-300">
+                Sign up
+              </button>
+            </Link>
           </div>
         </div>
       </div>

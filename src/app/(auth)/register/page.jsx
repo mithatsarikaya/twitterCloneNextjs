@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { BsTwitter } from "react-icons/bs";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import TwitterIconToHome from "../components/TwitterIconToHome";
 
 export default function Register() {
   const [info, setInfos] = useState({
@@ -9,6 +10,10 @@ export default function Register() {
     pwd: "",
     pwd2: "",
   });
+
+  const [error, setError] = useState(null);
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,18 +33,19 @@ export default function Register() {
       });
       res.status === 201 &&
         (console.log(res),
-        router.push("/dashboard/login?success=Account has been created"));
+        router.push("/login?success=Account has been created"));
+
+      console.log("what");
     } catch (err) {
       setError(err);
+      console.log("pronlem");
       console.log(err);
     }
   };
 
-  console.log(info);
-
   return (
     <div className="grid  place-items-center mt-10 gap-y-8">
-      <BsTwitter className="pl-1" color="#1D9BF0" size={35} />
+      <TwitterIconToHome />
       <h1 className="text-2xl font-bold">Register to Twitter</h1>
       <form
         onSubmit={handleSubmit}
@@ -68,10 +74,11 @@ export default function Register() {
           placeholder="password"
           type="text"
         /> */}
-        <button className="text-white font-bold bg-black w-64 py-2 rounded-full hover:bg-slate-700">
+        <button className="text-white font-bold bg-black w-64 py-2 rounded-full hover:bg-slate-800">
           Register
         </button>
       </form>
+      {error && <p>{error}</p>}
       <p>Already have a account?</p>
       <Link className="text-cyan-300 font-medium" href="login">
         Login
