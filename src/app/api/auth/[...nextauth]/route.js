@@ -25,8 +25,6 @@ const handler = NextAuth({
             );
 
             if (isPasswordCorrect) {
-              console.log("user: ", typeof user);
-
               // let newUser = {
               //   username: user.username,
               //   id: user._id.toString(),
@@ -37,7 +35,7 @@ const handler = NextAuth({
               let data = {
                 userId: user._id.toString(),
                 name: user.username,
-                email: `${user._id.toString()}`,
+                // email: `${user._id.toString()}`,
               };
               return data;
             } else {
@@ -55,6 +53,24 @@ const handler = NextAuth({
   pages: {
     error: "/login",
   },
+
+  //
+  callbacks: {
+    session({ session, token }) {
+      session.user.id = token.id;
+      session.user.username = token.username;
+      return session;
+    },
+    jwt({ token, account, user }) {
+      if (account) {
+        // token.accessToken = account.access_token;
+        token.id = user.userId;
+        token.username = user.username;
+      }
+      return token;
+    },
+  },
+  //
 });
 
 export { handler as GET, handler as POST };
