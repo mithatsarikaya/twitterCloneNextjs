@@ -4,10 +4,16 @@ const { Schema } = mongoose;
 
 const tweetSchema = new Schema(
   {
-    creatorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
+    creator: {
+      creatorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
+      creatorName: {
+        type: String,
+        required: true,
+      },
     },
     tweet: {
       type: String,

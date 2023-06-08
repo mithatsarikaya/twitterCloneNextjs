@@ -3,33 +3,57 @@ import connect from "../../../utils/db";
 import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
-  console.log(await request.json());
+  await connect();
 
-  return new NextResponse("Tweet has been created", {
+  let tweets = await Tweet.find().sort({ createdAt: -1 });
+
+  return new NextResponse(JSON.stringify(tweets), {
     status: 201,
   });
+};
 
-  //   const { username, password } = await request.json();
+export const POST = async (request) => {
+  const { tweet, creator } = await request.json();
 
-  //   console.log(username, password);
+  await connect();
 
-  //   await connect();
+  const newTweet = new Tweet({
+    creator,
+    tweet,
+  });
 
-  //   const hashedPassword = await bcrypt.hash(password, 5);
+  try {
+    await newTweet.save();
+    return new NextResponse("Tweet has been created", {
+      status: 201,
+    });
+  } catch (err) {
+    return new NextResponse(err.message, {
+      status: 500,
+    });
+  }
+};
 
-  //   const newUser = new User({
-  //     username,
-  //     password: hashedPassword,
+export const DELETE = async (request) => {
+  console.log("hello");
+  const { params } = request;
+
+  console.log(params);
+  await connect();
+
+  // const newTweet = new Tweet({
+  //   creator,
+  //   tweet,
+  // });
+
+  // try {
+  //   await newTweet.save();
+  //   return new NextResponse("Tweet has been created", {
+  //     status: 201,
   //   });
-
-  //   try {
-  //     await newUser.save();
-  //     return new NextResponse("User has been created", {
-  //       status: 201,
-  //     });
-  //   } catch (err) {
-  //     return new NextResponse(err.message, {
-  //       status: 500,
-  //     });
-  //   }
+  // } catch (err) {
+  //   return new NextResponse(err.message, {
+  //     status: 500,
+  //   });
+  // }
 };

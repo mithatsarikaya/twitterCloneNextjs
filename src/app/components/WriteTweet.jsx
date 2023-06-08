@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 
 export default function WriteTweet() {
@@ -7,16 +8,32 @@ export default function WriteTweet() {
   console.log(tweet);
   let tweetCharLimit = 140;
 
+  const { data } = useSession();
+  console.log(data);
   function handleTweeting(e) {
     setTweet(e.target.value);
     let tweetLength = e.target.value.length;
     console.log(tweetLength);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log("tweet");
-    axios.get("/api/tweets").then((res) => console.log(res));
+
+    // const res = await fetch("/api/tweets", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // console.log({ res });
+
+    axios
+      .post("/api/tweets", {
+        tweet: tweet,
+        creator: { creatorId: data.user.id, creatorName: data.user.name },
+      })
+      .then((res) => console.log({ res }));
   }
 
   tweetCharLimit = tweetCharLimit - tweet?.length;

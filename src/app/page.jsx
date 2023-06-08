@@ -1,13 +1,21 @@
 "use client";
 import Link from "next/link";
 import Tweet from "./components/Tweet";
+import Tweets from "./components/Tweets";
 import Sidebar from "./components/Sidebar";
 import WriteTweet from "./components/WriteTweet";
 import LoginRegisterBottom from "./components/LoginRegisterBottom";
 import { useSession } from "next-auth/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  // const [tweets, setTweets] = useState({});
   const session = useSession();
+
+  // axios.get("/api/tweets").then((res) => {
+  //   console.log(res);
+  // });
 
   return (
     <div className="flex bg-white mx-20 w-100 h-screen">
@@ -15,6 +23,7 @@ export default function Home() {
 
       <Sidebar />
       {/* sidebar */}
+      {/* <div>{JSON.stringify(tweets)}</div> */}
 
       {/* MAIN */}
       <div className="bg-white w-5/12 border-x-2 pt-3">
@@ -38,7 +47,7 @@ export default function Home() {
 
         {/* JUST TWEET */}
 
-        <Tweet />
+        <Tweets />
         {/* JUST TWEET */}
       </div>
       {/* MAIN */}

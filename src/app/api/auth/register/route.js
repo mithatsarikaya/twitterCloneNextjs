@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
+  // console.log(request);
+  console.log("wts");
   const { username, password } = await request.json();
 
   console.log(username, password);
