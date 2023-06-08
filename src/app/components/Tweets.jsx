@@ -1,15 +1,19 @@
 import axios from "axios";
 import Tweet from "./Tweet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-export default function Tweets() {
+export default function Tweets({ newTweet, setNewTweet }) {
   const { data } = useSession();
 
   const [tweetsData, setTweetsData] = useState([]);
 
-  axios.get("/api/tweets").then((res) => {
-    setTweetsData(res.data);
-  });
+  console.log("tweets", newTweet);
+  useEffect(() => {
+    axios.get("/api/tweets").then((res) => {
+      setTweetsData(res.data);
+    });
+  }, [newTweet]);
+
   return (
     <>
       {tweetsData.map((t) => (
@@ -21,6 +25,7 @@ export default function Tweets() {
           userOfTheTweet={t.creator.creatorName}
           tweetId={t._id}
           key={t._id}
+          setNewTweet={setNewTweet}
         />
       ))}
     </>

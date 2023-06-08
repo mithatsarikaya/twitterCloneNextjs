@@ -2,6 +2,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { FiTrash } from "react-icons/fi";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 export default function Tweet({
   isOwner,
   isFavourited,
@@ -9,13 +10,29 @@ export default function Tweet({
   userOfTheTweet,
   favCount,
   tweetId,
+  setNewTweet,
 }) {
+  const { data } = useSession();
+  console.log("data.user.id");
+
   function handleDelete(tweetId) {
     axios.delete(`/api/tweets/${tweetId}`).then((res) => console.log(res));
   }
 
   function handleFav(tweetId) {
-    axios.put(`/api/tweets/${tweetId}`).then((res) => console.log(res));
+    axios
+      .put(`/api/tweets/${tweetId}`, {
+        headers: {
+          userId: data.user.id,
+        },
+      })
+      .then((res) => {
+        console.log("check for problemn");
+
+        res.status == 200 &&
+          (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
+        console.log(res.status);
+      });
   }
 
   return (

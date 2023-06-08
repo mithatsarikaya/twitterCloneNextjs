@@ -21,6 +21,7 @@ export const DELETE = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
   console.log("hello from put");
+  console.log(request.headers.userId);
   const { id } = params;
 
   try {
@@ -28,9 +29,8 @@ export const PUT = async (request, { params }) => {
 
     let tweet = await Tweet.findById(id);
     console.log(tweet);
-    return;
 
-    return new NextResponse("Tweet has been deleted", { status: 200 });
+    return new NextResponse("Tweet has been faved lol", { status: 200 });
   } catch (err) {
     return new NextResponse("Database Error", { status: 500 });
   }

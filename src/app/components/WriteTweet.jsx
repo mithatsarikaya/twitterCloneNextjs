@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
-export default function WriteTweet() {
+export default function WriteTweet({ setNewTweet }) {
   const [tweet, setTweet] = useState("");
   console.log(tweet);
   let tweetCharLimit = 140;
@@ -33,7 +33,9 @@ export default function WriteTweet() {
         tweet: tweet,
         creator: { creatorId: data.user.id, creatorName: data.user.name },
       })
-      .then((res) => console.log({ res }));
+      .then((res) => {
+        res.status == 201 && setNewTweet((prev) => prev + 1);
+      });
   }
 
   tweetCharLimit = tweetCharLimit - tweet?.length;
@@ -66,3 +68,5 @@ export default function WriteTweet() {
     </div>
   );
 }
+
+//

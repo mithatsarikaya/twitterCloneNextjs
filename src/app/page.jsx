@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
   // const [tweets, setTweets] = useState({});
   const session = useSession();
+  const [newTweet, setNewTweet] = useState(0);
+  console.log({ newTweet });
 
   // axios.get("/api/tweets").then((res) => {
   //   console.log(res);
@@ -41,13 +43,15 @@ export default function Home() {
 
         {/* WRITE TWEET */}
 
-        {session.status === "authenticated" && <WriteTweet />}
+        {session.status === "authenticated" && (
+          <WriteTweet setNewTweet={setNewTweet} />
+        )}
 
         {/* WRITE TWEET */}
 
         {/* JUST TWEET */}
 
-        <Tweets />
+        <Tweets newTweet={newTweet} setNewTweet={setNewTweet} />
         {/* JUST TWEET */}
       </div>
       {/* MAIN */}
