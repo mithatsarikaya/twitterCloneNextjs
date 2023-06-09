@@ -16,7 +16,10 @@ export default function Tweet({
   console.log("data.user.id");
 
   function handleDelete(tweetId) {
-    axios.delete(`/api/tweets/${tweetId}`).then((res) => console.log(res));
+    axios.delete(`/api/tweets/${tweetId}`).then((res) => {
+      res.status == 200 &&
+        (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
+    });
   }
 
   function handleFav(tweetId) {
@@ -68,7 +71,7 @@ export default function Tweet({
           {isFavourited ? (
             <button
               onClick={() => handleFav(tweetId)}
-              className="p-1 my-1 rounded-full hover:bg-white"
+              className="p-1 my-1 rounded-full hover:bg-white "
             >
               <AiTwotoneHeart size="20px" color="red" />
             </button>

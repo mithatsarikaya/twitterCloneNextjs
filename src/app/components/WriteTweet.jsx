@@ -34,7 +34,7 @@ export default function WriteTweet({ setNewTweet }) {
         creator: { creatorId: data.user.id, creatorName: data.user.name },
       })
       .then((res) => {
-        res.status == 201 && setNewTweet((prev) => prev + 1);
+        res.status == 201 && (setNewTweet((prev) => prev + 1), setTweet(""));
       });
   }
 

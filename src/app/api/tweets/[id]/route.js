@@ -3,10 +3,8 @@ import connect from "../../../../utils/db";
 import { NextResponse } from "next/server";
 
 export const DELETE = async (request, { params }) => {
-  console.log("hello");
+  console.log("hello from delete");
   const { id } = params;
-
-  await connect();
 
   try {
     await connect();
@@ -35,7 +33,11 @@ export const PUT = async (request, { params }) => {
 
     //if fav true then un fav. else fav the tweet
     if (fav) {
-      tweet.favsOfTheTweet = tweet.favsOfTheTweet.filter((u) => u !== userId);
+      tweet.favsOfTheTweet = tweet.favsOfTheTweet.filter((u) => {
+        console.log(u == userId);
+        console.log({ userId });
+        return u != userId;
+      });
       await tweet.save();
       console.log({ " unfaved": tweet });
       return new NextResponse("Tweet has been unfaved lol", { status: 200 });
