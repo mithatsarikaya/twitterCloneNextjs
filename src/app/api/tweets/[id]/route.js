@@ -21,14 +21,48 @@ export const DELETE = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
   console.log("hello from put");
-  console.log(request.headers.userId);
+  console.log(request.headers);
   const { id } = params;
 
   try {
     await connect();
 
     let tweet = await Tweet.findById(id);
-    console.log(tweet);
+    // console.log(tweet);
+
+    return new NextResponse("Tweet has been faved lol", { status: 200 });
+  } catch (err) {
+    return new NextResponse("Database Error", { status: 500 });
+  }
+};
+
+export const GET = async (request, { params }) => {
+  console.log("hello from put");
+  console.log(request.headers);
+  const { id } = params;
+
+  try {
+    await connect();
+
+    let tweet = await Tweet.findById(id);
+    // console.log(tweet);
+
+    return new NextResponse("Tweet has been faved lol", { status: 200 });
+  } catch (err) {
+    return new NextResponse("Database Error", { status: 500 });
+  }
+};
+
+export const POST = async (request, { params }) => {
+  console.log("hello from put");
+  console.log(request.headers);
+  const { id } = params;
+
+  try {
+    await connect();
+
+    let tweet = await Tweet.findById(id);
+    // console.log(tweet);
 
     return new NextResponse("Tweet has been faved lol", { status: 200 });
   } catch (err) {

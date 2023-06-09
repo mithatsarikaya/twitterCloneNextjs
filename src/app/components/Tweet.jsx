@@ -20,10 +20,15 @@ export default function Tweet({
   }
 
   function handleFav(tweetId) {
+    const data = {
+      name: "John Doe",
+      email: "johndoe@example.com",
+    };
     axios
-      .put(`/api/tweets/${tweetId}`, {
+      .put(`/api/tweets/${tweetId}`, data, {
         headers: {
-          userId: data.user.id,
+          "Content-Type": "application/json",
+          token: "gelsinnn",
         },
       })
       .then((res) => {
@@ -33,6 +38,24 @@ export default function Tweet({
           (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
         console.log(res.status);
       });
+
+    //this works
+
+    // fetch(`/api/tweets/${tweetId}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     what: `deneme`,
+    //   },
+    // }).then((res) => {
+    //   console.log("check for problemn");
+
+    //   res.status == 200 &&
+    //     (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
+    //   console.log(res.status);
+    // });
+
+    //this works
   }
 
   return (
