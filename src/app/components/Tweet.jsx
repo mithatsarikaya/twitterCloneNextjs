@@ -20,15 +20,14 @@ export default function Tweet({
   }
 
   function handleFav(tweetId) {
-    const data = {
-      name: "John Doe",
-      email: "johndoe@example.com",
+    const favData = {
+      fav: isFavourited,
     };
     axios
-      .put(`/api/tweets/${tweetId}`, data, {
+      .put(`/api/tweets/${tweetId}`, favData, {
         headers: {
           "Content-Type": "application/json",
-          token: "gelsinnn",
+          token: data.user.id,
         },
       })
       .then((res) => {
