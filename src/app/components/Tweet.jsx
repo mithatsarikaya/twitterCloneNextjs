@@ -63,9 +63,15 @@ export default function Tweet({
   return (
     <div className="px-4 border-b-2 flex  h-auto">
       <div className="h-10 w-10 bg-cyan-600 rounded-full mt-5"></div>
-      <div className="flex-grow ml-2">
+      <div className="flex-1 ml-2">
         <h3 className="font-bold mt-2">{userOfTheTweet}</h3>
-        <p className="overflow-y  max-w-2xl break-words">{tweet}</p>
+        {/* <p className="overflow-y  max-w-2xl break-words">{tweet}</p> */}
+        {/* <textarea
+          disabled
+          className="disabled:outline-none disabled:bg-white block w-full  resize-none"
+          value={tweet}
+        /> */}
+        <p className="w-fit">{tweet}</p>
         <div className="float-right flex items-center">
           <span className=" pr-5  text-sm">{favCount}</span>
           {isFavourited ? (

@@ -53,7 +53,9 @@ export default function WriteTweet({ setNewTweet }) {
           rows={3}
         />
         <div className="float-right">
-          <span className="mr-5 pr-5 border-r-2">{tweetCharLimit}</span>
+          {tweet && (
+            <span className="mr-5 pr-5 border-r-2">{tweetCharLimit}</span>
+          )}
           <button
             disabled={tweetCharLimit == 140}
             className="border-2 px-2 my-2 fw-bold py-1 bg-cyan-500 ml-auto text-white  rounded-full font-medium 
