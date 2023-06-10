@@ -20,7 +20,7 @@ export default function Home() {
   // });
 
   return (
-    <div className="flex bg-white mx-20 w-100 h-screen">
+    <div className="flex items-start bg-white mx-20 w-100 h-auto">
       {/* sidebar */}
 
       <Sidebar />
@@ -28,7 +28,7 @@ export default function Home() {
       {/* <div>{JSON.stringify(tweets)}</div> */}
 
       {/* MAIN */}
-      <div className="bg-white w-5/12 border-x-2 pt-3">
+      <div className="bg-white w-5/12 border-x-2 h-auto pt-3">
         <div className="pl-4">
           <h1 className="font-bold text-xl  cursor-pointer">Anasayfa</h1>
         </div>

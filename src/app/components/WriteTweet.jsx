@@ -2,9 +2,11 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { BiLoaderCircle } from "react-icons/bi";
 
 export default function WriteTweet({ setNewTweet }) {
   const [tweet, setTweet] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   console.log(tweet);
   let tweetCharLimit = 140;
 
@@ -19,6 +21,7 @@ export default function WriteTweet({ setNewTweet }) {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("tweet");
+    setIsLoading(true);
 
     // const res = await fetch("/api/tweets", {
     //   method: "GET",
@@ -34,7 +37,8 @@ export default function WriteTweet({ setNewTweet }) {
         creator: { creatorId: data.user.id, creatorName: data.user.name },
       })
       .then((res) => {
-        res.status == 201 && (setNewTweet((prev) => prev + 1), setTweet(""));
+        res.status == 201 &&
+          (setNewTweet((prev) => prev + 1), setTweet(""), setIsLoading(false));
       });
   }
 
@@ -63,7 +67,7 @@ export default function WriteTweet({ setNewTweet }) {
             disabled:opacity-40"
             onClick={handleSubmit}
           >
-            Tweetle
+            {isLoading ? <BiLoaderCircle color="white" /> : "Tweetle"}
           </button>
         </div>
       </div>

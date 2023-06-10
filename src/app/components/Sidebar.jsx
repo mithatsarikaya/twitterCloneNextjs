@@ -7,16 +7,18 @@ import { RiFileListLine } from "react-icons/ri";
 import { BsBookmark } from "react-icons/bs";
 import { BsPerson } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
+import { SlLogin } from "react-icons/sl";
+import TwitterIconToHome from "../(auth)/components/TwitterIconToHome";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
 export default function Sidebar() {
   const session = useSession();
   return (
-    <div className="bg-white w-3/12 pt-3">
+    <div className="bg-slate-500 w-3/12 pt-3 sticky top-0 ">
       {session.status === "authenticated" ? (
         <div className="pl-20">
-          <Link href="#">
+          <Link href="/">
             <BsTwitter className="pl-1" color="#1D9BF0" size={30} />
           </Link>
           <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
@@ -57,17 +59,22 @@ export default function Sidebar() {
         </div>
       ) : (
         <div className="pl-20">
-          <Link href="#">
+          <Link href="/">
             <BsTwitter className="pl-1" color="#1D9BF0" size={30} />
           </Link>
           <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
-            <BsBookmark color="black" size={30} />
-            Yer İşaretleri
+            <LuHash color="black" size={30} />
+            Keşfet
           </a>
-          <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
-            <BsPerson color="black" size={30} />
-            Profil
-          </a>
+          {/* <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "> */}
+          <Link
+            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "
+            href="/login"
+          >
+            <SlLogin color="black" size={30} />
+            Giriş
+          </Link>
+          {/* </a> */}
         </div>
       )}
     </div>
