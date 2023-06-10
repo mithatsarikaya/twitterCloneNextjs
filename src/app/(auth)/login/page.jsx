@@ -17,7 +17,7 @@ export default function Login() {
   }, [params]);
 
   if (session.status === "loading") {
-    return <p>Loading...</p>;
+    return <p className="p-20">Loading...</p>;
   }
 
   if (session.status === "authenticated") {

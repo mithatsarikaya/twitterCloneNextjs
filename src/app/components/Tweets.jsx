@@ -26,6 +26,7 @@ export default function Tweets({ newTweet, setNewTweet }) {
           tweetId={t._id}
           key={t._id}
           setNewTweet={setNewTweet}
+          creatorId={t.creator.creatorId}
         />
       ))}
     </>

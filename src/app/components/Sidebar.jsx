@@ -15,7 +15,7 @@ import { signOut, useSession } from "next-auth/react";
 export default function Sidebar() {
   const session = useSession();
   return (
-    <div className="bg-slate-500 w-3/12 pt-3 sticky top-0 ">
+    <div className="w-3/12 pt-3 sticky top-0 ">
       {session.status === "authenticated" ? (
         <div className="pl-20">
           <Link href="/">

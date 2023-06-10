@@ -38,7 +38,7 @@ export default function Register() {
       console.log("what");
     } catch (err) {
       setError(err);
-      console.log("pronlem");
+      console.log("problem");
       console.log(err);
     }
   };
