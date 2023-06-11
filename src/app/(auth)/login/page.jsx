@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getProviders, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import TwitterIconToHome from "../components/TwitterIconToHome";
 
@@ -9,7 +9,6 @@ export default function Login() {
   const session = useSession();
   const router = useRouter();
   const params = useSearchParams();
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {

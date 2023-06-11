@@ -7,29 +7,16 @@ import { BiLoaderCircle } from "react-icons/bi";
 export default function WriteTweet({ setNewTweet }) {
   const [tweet, setTweet] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  console.log(tweet);
   let tweetCharLimit = 140;
 
   const { data } = useSession();
-  console.log(data);
   function handleTweeting(e) {
     setTweet(e.target.value);
-    let tweetLength = e.target.value.length;
-    console.log(tweetLength);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("tweet");
     setIsLoading(true);
-
-    // const res = await fetch("/api/tweets", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // console.log({ res });
 
     axios
       .post("/api/tweets", {

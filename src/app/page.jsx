@@ -1,13 +1,10 @@
 "use client";
-import Link from "next/link";
-import Tweet from "./components/Tweet";
 import Tweets from "./components/Tweets";
 import Sidebar from "./components/Sidebar";
 import WriteTweet from "./components/WriteTweet";
 import LoginRegisterBottom from "./components/LoginRegisterBottom";
 import { useSession } from "next-auth/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   // const [tweets, setTweets] = useState({});

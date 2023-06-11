@@ -18,7 +18,6 @@ export default function Tweet({
 }) {
   const router = useRouter();
   const { data } = useSession();
-  console.log("data.user.id");
 
   function handleDelete(tweetId) {
     axios.delete(`/api/tweets/${tweetId}`).then((res) => {
@@ -44,10 +43,8 @@ export default function Tweet({
 
           res.status == 200 &&
             (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
-          console.log(res.status);
         });
     } else {
-      console.log("wtf");
       router.push("/login?success=Login to fav");
     }
 
@@ -74,7 +71,7 @@ export default function Tweet({
     <div className="px-4 border-b-2 flex  h-auto">
       <div className="h-10 w-10 bg-cyan-600 rounded-full mt-5"></div>
       <div className="flex-1 ml-2">
-        <Link href={`/userpage/${creatorId}`}>
+        <Link href={`/userpage/${creatorId}?username=${userOfTheTweet}`}>
           <h3 className="font-bold mt-2">{userOfTheTweet}</h3>
         </Link>
         {/* <p className="overflow-y  max-w-2xl break-words">{tweet}</p> */}

@@ -8,7 +8,6 @@ import { BsBookmark } from "react-icons/bs";
 import { BsPerson } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
 import { SlLogin } from "react-icons/sl";
-import TwitterIconToHome from "../(auth)/components/TwitterIconToHome";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
@@ -21,10 +20,15 @@ export default function Sidebar() {
           <Link href="/">
             <BsTwitter className="pl-1" color="#1D9BF0" size={30} />
           </Link>
-          <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
+          {/* <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "> */}
+          <Link
+            href="/"
+            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "
+          >
             <BiHomeCircle color="black" size={30} />
             Anasayfa
-          </a>
+          </Link>
+          {/* </a> */}
           <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
             <LuHash color="black" size={30} />
             Keşfet
