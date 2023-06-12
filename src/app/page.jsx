@@ -10,7 +10,6 @@ export default function Home() {
   // const [tweets, setTweets] = useState({});
   const session = useSession();
   const [newTweet, setNewTweet] = useState(0);
-  console.log({ newTweet });
 
   // axios.get("/api/tweets").then((res) => {
   //   console.log(res);

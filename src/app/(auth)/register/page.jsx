@@ -3,14 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import TwitterIconToHome from "../components/TwitterIconToHome";
+import axios from "axios";
 
 export default function Register() {
-  const [info, setInfos] = useState({
-    username: "",
-    pwd: "",
-    pwd2: "",
-  });
-
   const [error, setError] = useState(null);
 
   const router = useRouter();
@@ -21,25 +16,15 @@ export default function Register() {
     const password = e.target[1].value;
 
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-      res.status === 201 &&
-        (console.log(res),
-        router.push("/login?success=Account has been created"));
-
-      console.log("what");
+      axios
+        .post("/api/auth/register", { username, password })
+        .then(
+          (res) =>
+            res.status === 201 &&
+            router.push("/login?success=Account has been created")
+        );
     } catch (err) {
       setError(err);
-      console.log("problem");
-      console.log(err);
     }
   };
 

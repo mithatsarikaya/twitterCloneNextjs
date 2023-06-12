@@ -10,8 +10,6 @@ export default function Login() {
   const router = useRouter();
   const params = useSearchParams();
   const [success, setSuccess] = useState("");
-  console.log({ success });
-  console.log(params.get("success"));
 
   useEffect(() => {
     setSuccess(params.get("success"));
@@ -22,7 +20,7 @@ export default function Login() {
   }
 
   if (session.status === "authenticated") {
-    router?.push("/");
+    router.push("/");
   }
 
   const handleSubmit = (e) => {
@@ -42,7 +40,7 @@ export default function Login() {
       <h1>{success ? success : "Welcome Back"}</h1>
       <h1 className="text-2xl font-bold">Sign in to Twitter</h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => handleSubmit(e)}
         className="grid place-items-center gap-y-8"
         action=""
       >
