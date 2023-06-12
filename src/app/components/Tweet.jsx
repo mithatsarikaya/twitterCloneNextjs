@@ -39,8 +39,6 @@ export default function Tweet({
           },
         })
         .then((res) => {
-          console.log("check for problemn");
-
           res.status == 200 &&
             (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
         });

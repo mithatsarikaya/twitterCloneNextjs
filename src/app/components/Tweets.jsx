@@ -7,16 +7,12 @@ export default function Tweets({ newTweet, setNewTweet, tweetsof = "home" }) {
 
   const [tweetsData, setTweetsData] = useState([]);
 
-  console.log({ tweetsof });
-
-  console.log("tweets", newTweet);
   useEffect(() => {
     if (tweetsof === "home") {
       axios.get("/api/tweets").then((res) => {
         setTweetsData(res.data);
       });
     } else if (tweetsof !== "home") {
-      console.log("from not home tweet");
       axios
         .get(`/api/usertweets/${tweetsof}`)
         .then((res) => setTweetsData(res.data));

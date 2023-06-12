@@ -10,6 +10,8 @@ export default function Login() {
   const router = useRouter();
   const params = useSearchParams();
   const [success, setSuccess] = useState("");
+  console.log({ success });
+  console.log(params.get("success"));
 
   useEffect(() => {
     setSuccess(params.get("success"));

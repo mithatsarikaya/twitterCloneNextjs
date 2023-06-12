@@ -13,6 +13,8 @@ import { signOut, useSession } from "next-auth/react";
 
 export default function Sidebar() {
   const session = useSession();
+  let username = session.data?.user.name;
+  let userId = session.data?.user.id;
   return (
     <div className="w-3/12 pt-3 sticky top-0 ">
       {session.status === "authenticated" ? (
@@ -23,7 +25,7 @@ export default function Sidebar() {
           {/* <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "> */}
           <Link
             href="/"
-            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "
+            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-bold hover:bg-slate-200 "
           >
             <BiHomeCircle color="black" size={30} />
             Anasayfa
@@ -49,13 +51,16 @@ export default function Sidebar() {
             <BsBookmark color="black" size={30} />
             Yer İşaretleri
           </a>
-          <a className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 ">
+          <Link
+            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-bold hover:bg-slate-200 "
+            href={`userpage/${userId}?username=${username}`}
+          >
             <BsPerson color="black" size={30} />
-            Profil
-          </a>
+            {username}
+          </Link>
           <a
             onClick={signOut}
-            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-normal hover:bg-slate-200 "
+            className="flex pl-1 py-2 gap-4 rounded-full cursor-pointer text-lg mt-3 font-bold hover:bg-slate-200 "
           >
             <LuLogOut color="black" size={30} />
             Çıkış
