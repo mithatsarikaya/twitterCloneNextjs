@@ -45,7 +45,6 @@ export default function Login() {
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="grid place-items-center gap-y-8"
-        action=""
       >
         <input
           required
