@@ -17,7 +17,7 @@ export default function Tweets({ newTweet, setNewTweet, tweetsof = "home" }) {
         .get(`/api/usertweets/${tweetsof}`)
         .then((res) => setTweetsData(res.data));
     }
-  }, [newTweet]);
+  }, [newTweet, tweetsof]);
 
   return (
     <>
