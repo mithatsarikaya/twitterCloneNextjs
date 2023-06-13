@@ -21,8 +21,7 @@ export default function Tweet({
 
   function handleDelete(tweetId) {
     axios.delete(`/api/tweets/${tweetId}`).then((res) => {
-      res.status == 200 &&
-        (console.log("ne oluyor babos"), setNewTweet((prev) => prev + 1));
+      res.status == 200 && setNewTweet((prev) => prev + 1);
     });
   }
 
@@ -39,8 +38,7 @@ export default function Tweet({
           },
         })
         .then((res) => {
-          res.status == 200 &&
-            (console.log("ne oluyor babsos"), setNewTweet((prev) => prev + 1));
+          res.status == 200 && setNewTweet((prev) => prev + 1);
         });
     } else {
       router.push("/login?success=Login to fav");

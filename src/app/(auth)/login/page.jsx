@@ -10,9 +10,11 @@ export default function Login() {
   const router = useRouter();
   const params = useSearchParams();
   const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setSuccess(params.get("success"));
+    setError(params.get("error"));
   }, [params]);
 
   if (session.status === "loading") {
@@ -25,6 +27,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
     const username = e.target[0].value;
     const password = e.target[1].value;
 
@@ -56,6 +59,7 @@ export default function Login() {
           placeholder="password"
           type="text"
         />
+        {error && <p className="text-red-700">{error}</p>}
         <button className="text-white font-bold bg-black w-64 py-2 rounded-full hover:bg-slate-800">
           Login
         </button>

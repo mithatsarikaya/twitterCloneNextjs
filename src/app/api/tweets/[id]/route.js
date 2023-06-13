@@ -3,7 +3,6 @@ import connect from "../../../../utils/db";
 import { NextResponse } from "next/server";
 
 export const DELETE = async (request, { params }) => {
-  console.log("hello from delete");
   const { id } = params;
 
   try {
@@ -18,28 +17,22 @@ export const DELETE = async (request, { params }) => {
 };
 
 export const PUT = async (request, { params }) => {
-  console.log("hello from put");
   let userId = request.headers.get("token");
-  console.log(userId);
   const { fav } = await request.json();
-  console.log(fav);
   const { id } = params;
 
   try {
     await connect();
 
     let tweet = await Tweet.findById(id);
-    console.log(tweet);
 
     //if fav true then un fav. else fav the tweet
     if (fav) {
       tweet.favsOfTheTweet = tweet.favsOfTheTweet.filter((u) => {
-        console.log(u == userId);
-        console.log({ userId });
         return u != userId;
       });
       await tweet.save();
-      console.log({ " unfaved": tweet });
+
       return new NextResponse("Tweet has been unfaved lol", { status: 200 });
     } else if (!fav) {
       tweet.favsOfTheTweet = [...tweet.favsOfTheTweet, userId];
@@ -52,8 +45,6 @@ export const PUT = async (request, { params }) => {
 };
 
 export const GET = async (request, { params }) => {
-  console.log("hello from get");
-  console.log(request.headers);
   const { id } = params;
 
   try {
@@ -69,9 +60,6 @@ export const GET = async (request, { params }) => {
 };
 
 export const POST = async (request, { params }) => {
-  console.log("hello from post");
-  console.log(request.headers.get("token"));
-  console.log(request.data);
   const { id } = params;
 
   try {

@@ -35,10 +35,8 @@ export const POST = async (request) => {
 };
 
 export const DELETE = async (request) => {
-  console.log("hello");
   const { params } = request;
 
-  console.log(params);
   await connect();
 
   // const newTweet = new Tweet({
